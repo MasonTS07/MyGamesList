@@ -1,19 +1,6 @@
 const gameListContainer = document.querySelector('.game-list-container');
 
-let myGameList = [
-    {
-        title: 'World of Warcraft',
-        developer: 'Blizzard',
-        genre: 'MMO',
-        rating: '10'
-    },
-    {
-        title: 'League of Legends',
-        developer: 'Riot Games',
-        genre: 'MOBA',
-        rating: '10'
-    }
-];
+let myGameList = [];
 
 class Game {
     constructor(title, developer, genre, rating) {
@@ -23,6 +10,7 @@ class Game {
         this.rating = rating
     }
 }
+
 
 function addGameToList(game) {
   const div = document.createElement('div');
@@ -35,14 +23,11 @@ function addGameToList(game) {
   div.classList.add('gameinfo');
   removeBtn.classList.add('removeBtn');
 
-
   title.textContent = game.title;
   developer.textContent = `Dev: ${game.developer}`;
   genre.textContent = `Genre: ${game.genre}`;
   rating.textContent = `Rating: ${game.rating}`;
   removeBtn.textContent = 'Delete';
-
-
 
   gameListContainer.appendChild(div);
   div.appendChild(title);
@@ -50,10 +35,9 @@ function addGameToList(game) {
   div.appendChild(genre);
   div.appendChild(rating);
   div.appendChild(removeBtn);
-  const gameInfo = document.querySelectorAll('.gameinfo')
-
 
 }
+
 
 function clearForm() {
   document.querySelector('.title').value = '';
@@ -62,22 +46,33 @@ function clearForm() {
   document.querySelector('.rating').value = '';
 }
 
-document.querySelector('.game-form').addEventListener('submit', (e) => {
 
+function deleteGame(el) {
+  if(el.classList.contains('removeBtn')) {
+    el.parentElement.remove();
+  }
+}
+
+
+document.querySelector('.game-form').addEventListener('submit', (e) => {
   e.preventDefault();
   const title = document.querySelector('.title').value;
   const developer = document.querySelector('.developer').value;
   const genre = document.querySelector('.genre').value;
   const rating = document.querySelector('.rating').value;
 
-  const game = new Game(title, developer, genre, rating);
+  if(title === '' || developer === '' || genre === '' || rating === '') {
+    alert('Please Fill in the Fields Below.');
+  }
+  else {
+    const game = new Game(title, developer, genre, rating);
+    addGameToList(game);
+    clearForm();
+  }
+})
 
-  addGameToList(game);
-  clearForm();
-
-
-
-
+document.querySelector('.game-list-container').addEventListener('click', (e) => {
+  deleteGame(e.target)
 })
 
 

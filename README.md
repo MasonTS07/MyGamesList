@@ -1,10 +1,10 @@
-## Library
+## MyGamesList
 
-A Library that was built using HTML, CSS, and JavaScript
+A Game Library that was built using HTML, CSS, and JavaScript
 
-[Live Demo](https://MasonTS07.github.io/library/)
+[Live Demo](https://MasonTS07.github.io/MyGamesList/)
 
 ## Screen Shot
 
-![](images/LibrarySS.png)
+![](images/MyGamesListSS.png)
 
